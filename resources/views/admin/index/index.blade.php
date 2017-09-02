@@ -4,7 +4,7 @@
 
 @section('css')
     <link rel="stylesheet" href="//at.alicdn.com/t/font_tnyc012u2rlwstt9.css" media="all" />
-    <link rel="stylesheet" href="dist/css/index.css">
+    <link rel="stylesheet" href="{{asset('dist/css/index.css')}}">
 
 @endsection
 
@@ -71,7 +71,7 @@
                     <i class="iconfont icon-text" data-icon="icon-text"></i>
                 </div>
                 <div class="panel_word allNews">
-                    <span>12133</span>
+                    <span>121</span>
                     <em>文章总数</em>
                     <cite>文章列表</cite>
                 </div>
@@ -156,5 +156,5 @@
 @endsection
 
 @section('js')
-    <script src="dist/js/index.js"></script>
+    <!-- <script src="dist/js/index.js"></script> -->
 @endsection
