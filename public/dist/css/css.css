@@ -1,1 +1,2 @@
-.layui-body .content{margin: 10px 0 5px 10px;}
+.layui-body{bottom: 0 !important;}
+.layui-body .content{margin:10px;}

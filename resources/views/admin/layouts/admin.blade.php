@@ -21,7 +21,7 @@
   @include('admin.layouts.main')
 
   {{--尾部区--}}
-  @include('admin.layouts.footer')
+  {{--@include('admin.layouts.footer')--}}
 
 </div>
 <script src="{{asset('layui/layui.js')}}"></script>
