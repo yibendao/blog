@@ -17,11 +17,14 @@ class CreateArticlesTable extends Migration
             $table->increments('id');
             $table->string('title',50);
             $table->string('author',20);
-            $table->enum('status',['draft','publish','delete','suspend']);
-            $table->string('src');
-            $table->string('desc');
-            $table->text('content');
-            $table->integer('user_id');
+            $table->integer('pic_id')->nullable();
+            $table->enum('status',['draft','publish','delete','suspend'])->default('draft');
+            $table->enum('recom',['ON','OFF'])->default('OFF');
+            $table->enum('top',['ON','OFF'])->default('OFF');
+            $table->string('src')->nullable();
+            $table->string('desc')->nullable();
+            $table->text('content')->nullable();
+            $table->integer('user_id')->default(0);
             $table->timestamps();
         });
     }

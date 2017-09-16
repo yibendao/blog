@@ -12,21 +12,24 @@
 */
 
 Route::get('/', function () {
+//    echo '<img src="'.asset('imgsys/20170911/ef7548447d7ee819cb345e0df40614da.jpeg').'">';
     return view('welcome');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
+Route::post('resource-upload','ResourceController@upload');
 Route::group(['prefix'=>'admin','namespace'=>'Admin'],function () {
-    Route::get('/','IndexController@index');
+    //ajax通用路由
+    Route::resource('ajax','AjaxController');
 
+    Route::get('/','IndexController@index');
     //文章路由
     Route::get('article-list','ArticleController@index');
     Route::get('article-create','ArticleController@create');
     Route::get('article-show','ArticleController@show');
-    Route::get('article-edit','ArticleController@edit');
+    Route::get('article-edit/{id}','ArticleController@edit');
     Route::post('article-update','ArticleController@update');
     Route::post('article-store','ArticleController@store');
     Route::post('article-delete','ArticleController@delete');
@@ -52,3 +55,5 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function () {
 
 
 });
+
+Route::get('imgsys/{one?}/{two?}/{three?}/{four?}/{five?}/{six?}/{seven?}/{eight?}/{nine?}','ResourceController@getRealImagePath');

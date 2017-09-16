@@ -1,2 +1,16 @@
 .margin-left-5{margin-left: 5pc;}
 .layui-nav .layui-nav-child a {padding: 0 45px;}
+.layui-pic{
+    position: relative;
+    /*padding: 30px;*/
+    width: 160px;
+    height:90px;
+    border: 1px dashed #e2e2e2;
+    background-color: #fff;
+    text-align: center;
+    color: #999;}
+.upload-article-pic{cursor: pointer;}
+#remove-article-pic{display: none;}
+.layui-switch{position: relative;min-height: 22px;}
+.layui-switch .layui-form-switch{width: 55px;margin-top: 0;}
+.layui-switch .layui-form-switch i{top:2px;}

@@ -1,5 +1,5 @@
 <div class="layui-body">
-    <div class="layui-row">
+    <div class="layui-row breadcrumb-nav">
         <span class="layui-breadcrumb">
           <a href="">首页</a>
           @yield('breadcrumb')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Model\Articles;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -12,7 +13,7 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return view('admin.article.index');
     }
@@ -24,7 +25,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('admin.article.create');
+        return view('admin.article.create',['item'=>new Articles()]);
     }
 
     /**
@@ -35,7 +36,11 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $article = new Articles();
+        $article->fill($request->all());
+        $article->save();
+        $redirect = url('admin/article-list');
+        return response()->json(['success'=>true,'item'=>$article,'redirect'=>$redirect]);
     }
 
     /**
@@ -57,7 +62,8 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.article.create');
+        $item = Articles::findOrFail($id);
+        return view('admin.article.create',['item'=>$item]);
     }
 
     /**
