@@ -31,7 +31,7 @@
 <script src="{{asset('js/jquery.form.min.js')}}"></script>
 <script src="{{asset('js/layer/layer.js')}}"></script>
 <script src="{{asset('layui/layui.js')}}"></script>
-
+<script src="{{asset('js/common.js')}}"></script>
 @yield('js')
 <script>
 //JavaScript代码区域

@@ -10,9 +10,7 @@ layui.use(['form', 'layedit', 'laydate', 'upload', 'layer'], function(){
     //日期
     laydate.render({
         elem: '#date'
-    });
-    laydate.render({
-        elem: '#date1'
+        ,type: 'datetime'
     });
 
     //创建一个编辑器
@@ -60,15 +58,19 @@ layui.use(['form', 'layedit', 'laydate', 'upload', 'layer'], function(){
     });
 
     function submitArticleForm() {
+        var articleForm = $(".article-form");
+        var message = articleForm.data("message");
         $("form").ajaxSubmit({
+            type: articleForm.attr('method'),
             success: function (resp) {
                 if(resp.success) {
-                    layer.msg('创建成功');
+                    layer.msg( message + '成功');
                     setTimeout(function () {
-                        $(location).attr('href',resp.redirect)
+                        // $(location).attr('href',resp.redirect)
+                        $(location).attr('href',document.referrer);
                     },1000);
                 } else {
-                    layer.msg('创建失败');
+                    layer.msg( message + '失败');
                     console.log(resp);
                 }
             }

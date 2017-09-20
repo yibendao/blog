@@ -25,7 +25,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('admin.article.create',['item'=>new Articles()]);
+        return view('admin.article.create',['item'=>new Articles(),'isNew'=>true]);
     }
 
     /**
@@ -63,7 +63,7 @@ class ArticleController extends Controller
     public function edit($id)
     {
         $item = Articles::findOrFail($id);
-        return view('admin.article.create',['item'=>$item]);
+        return view('admin.article.create',['item'=>$item,'isNew'=>false]);
     }
 
     /**

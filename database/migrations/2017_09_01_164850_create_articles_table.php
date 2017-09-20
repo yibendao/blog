@@ -18,6 +18,7 @@ class CreateArticlesTable extends Migration
             $table->string('title',50);
             $table->string('author',20);
             $table->integer('pic_id')->nullable();
+            $table->integer('cate_id')->default(0);
             $table->enum('status',['draft','publish','delete','suspend'])->default('draft');
             $table->enum('recom',['ON','OFF'])->default('OFF');
             $table->enum('top',['ON','OFF'])->default('OFF');

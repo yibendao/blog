@@ -8,14 +8,13 @@
 @section('content')
     <blockquote class="layui-elem-quote">
         <div class="articleTable">
-            搜索ID：
             <div class="layui-inline">
                 <input class="layui-input" name="q" id="articleReload" autocomplete="off">
             </div>
-            <button class="layui-btn" data-type="reload">搜索</button>
-            <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
-            <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
-            <button class="layui-btn" data-type="isAll">验证是否全选</button>
+            <button class="layui-btn" data-type="search"><i class="layui-icon">&#xe615;</i> 搜索</button>
+            <button class="layui-btn  layui-btn-danger" data-type="delAll"><i class="layui-icon">&#xe640;</i> 删除选中行</button>
+            {{--<button class="layui-btn" data-type="getCheckLength">获取选中数目</button>--}}
+            {{--<button class="layui-btn" data-type="isAll">验证是否全选</button>--}}
         </div>
 
     </blockquote>
@@ -44,8 +43,8 @@
 //                ,{field:'src', title: '来源', sort: true, width:160}
                 ,{field:'recom', title: '是否推荐', width:100,templet:'#recomSwitch'}
                 ,{field:'top', title: '是否置顶', width:100,templet:'#topSwitch'}
-                ,{field:'status', title: '状态', sort: true, width:80}
-                ,{field:'created_at', title: '创建时间', width:160}
+                ,{field:'formatStatus', title: '状态', width:80}
+                ,{field:'created_at', title: '创建时间',sort: true, width:160}
                 ,{fixed: 'right', width:160, align:'center', toolbar: '#barDemo'}
             ]]
             ,page: true
@@ -98,7 +97,7 @@
 
 
         var $ = layui.$, active = {
-            reload:function () {
+            search:function () { //搜索
                 var articleReload = $('#articleReload');
                 tableIns.reload({
                     where: {
@@ -106,19 +105,15 @@
                     }
                 });
             },
-            getCheckData: function(){ //获取选中数据
-                var checkStatus = table.checkStatus('article-list')
-                    ,data = checkStatus.data;
-                layer.alert(JSON.stringify(data));
-            }
-            ,getCheckLength: function(){ //获取选中数目
-                var checkStatus = table.checkStatus('article-list')
-                    ,data = checkStatus.data;
-                layer.msg('选中了：'+ data.length + ' 个');
-            }
-            ,isAll: function(){ //验证是否全选
-                var checkStatus = table.checkStatus('article-list');
-                layer.msg(checkStatus.isAll ? '全选': '未全选')
+            delAll: function(){ //删除选中数据
+                layer.confirm('确认删除？',function () {
+                    var checkStatus = table.checkStatus('article-list')
+                        ,data = checkStatus.data;
+                    var ids = getIdFromTable(data);
+                    ajaxDel("{{url('admin/ajax/destroyAll?_model=Articles')}}",{_token:token,ids:ids},"POST");
+                    table.reload('article-list');
+                });
+
             }
         };
 

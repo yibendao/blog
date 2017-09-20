@@ -72,7 +72,12 @@ class AjaxController extends Controller
             $model = $this->model($id);
             $model = $model->fill($request->all());
 
-            if($model->save()) {
+            $bool = true;
+            if(method_exists($model,'beforeSave')) {
+                $bool = $model->beforeSave();
+            }
+
+            if($bool && $model->save()) {
                 return $this->response(true,['item'=>$model]);
             } else {
                 $this->error = $model->errors;
@@ -88,6 +93,19 @@ class AjaxController extends Controller
         if($this->beforeDestroy($request->all())) {
             $mode->delete();
             return $this->response(true,['msg'=>'删除成功'],201);
+        }
+        return $this->response(false,['msg'=>'删除失败'],204);
+    }
+    public function destroyAll(Request $request)
+    {
+        if($this->beforeDestroy($request->all())) {
+            if($request->input('ids') && is_array($request->input('ids'))) {
+                foreach ($request->input('ids') as $id) {
+                    if($mode = $this->model($id)) $mode->delete();
+                }
+                return $this->response(true,['msg'=>'删除成功'],201);
+            }
+
         }
         return $this->response(false,['msg'=>'删除失败'],204);
     }

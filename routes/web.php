@@ -23,6 +23,7 @@ Route::post('resource-upload','ResourceController@upload');
 Route::group(['prefix'=>'admin','namespace'=>'Admin'],function () {
     //ajax通用路由
     Route::resource('ajax','AjaxController');
+    Route::post('ajax/destroyAll','AjaxController@destroyAll');
 
     Route::get('/','IndexController@index');
     //文章路由
